@@ -1,0 +1,30 @@
+
+
+{% extends 'music/base.html' %}
+
+<!--{{ album }}-->
+{% block title %}Album details{% endblock %}
+
+{% block body %}
+    <img src="{{ album.album_logo.url }}" style="width:200px;height:200px;">
+
+    <h1>{{ album.album_title }}</h1>
+    <h3>{{ album.artist }}</h3>
+
+
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+
+        {% for song in album.song_set.all %}
+
+            <label for="song{{ forloop.counter }}">
+                {{ song.song_title }}
+                {% if song.is_favorite %}
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7ozu36duHdWdb0mzC3i1_B-8hI-jgdCeNa0rpQLrOBBB9pKUs" style="width:15px;height:15px;">
+                {% endif %}
+            </label><br>
+        {% endfor %}
+
+{% endblock %}
